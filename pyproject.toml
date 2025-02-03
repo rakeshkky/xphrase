@@ -1,0 +1,28 @@
+[project]
+name = "xphrase"
+version = "0.1.0"
+description = "An AI rephrase tool for personal use"
+authors = [
+    {name = "Rakesh",email = "12475069+rakeshkky@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "argparse (>=1.4.0,<2.0.0)",
+    "pyperclip (>=1.9.0,<2.0.0)",
+    "setuptools (>=75.8.0,<76.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+xphrase = "xphrase.main:main"
+
+[[tool.poetry.source]]
+name = "amd"
+url = "https://download.pytorch.org/whl/rocm6.2.4"
+priority = "explicit"
