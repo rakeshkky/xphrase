@@ -5,7 +5,7 @@ import pkg_resources
 
 # Ollama API endpoint
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
-MODEL = "llama3.2"
+MODEL = "gemma2:2b"
 
 # System prompt for rephrasing
 SYSTEM_PROMPT = """
