@@ -5,13 +5,12 @@ import pkg_resources
 
 # Ollama API endpoint
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
-MODEL = "gemma2:2b"
+MODEL = "gemma3:1b"
 
-# System prompt for rephrasing
-SYSTEM_PROMPT = """
-Your task is to correct any spelling or grammatical errors in the text provided by the user. Ensure the corrected text maintains
-the original meaning, tone, verbosity, and structure. Respond only with the corrected and rephrased text, and nothing else.
-Do not add explanations, interpretations, or additional content.
+# User prompt for rephrasing
+USER_PROMPT = """
+Please take the following text and rephrase it, making only minimal changes to enhance clarity and effectiveness.
+Retain the original structure of the text. Respond with only the rephrased text.
 """
 
 def get_version():
@@ -22,7 +21,7 @@ def get_version():
         str: Version string
     """
     version = pkg_resources.get_distribution('xphrase').version
-    return f"{version}"
+    return f"{version} {MODEL}"
 
 def rephrase_text(input_text):
     """
@@ -36,9 +35,8 @@ def rephrase_text(input_text):
     """
     payload = {
         "model": MODEL,
-        "prompt": input_text,
-        "stream": False,
-        "system": SYSTEM_PROMPT,
+        "prompt": USER_PROMPT + f"\n\nText to rephrase: {input_text}",
+        "stream": False
     }
 
     response = requests.post(OLLAMA_API_URL, json=payload)
